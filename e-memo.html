@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E資格の簡易メモ</title>
+  <script>
+    /*MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        processEscapes: true,
+        tags: 'ams',
+        macros: {
+          ssqrt: ['\\sqrt{\\smash[b]{\\mathstrut #1}}', 1],
+          tcdegree: ['\\unicode{xb0}'],
+          tccelsius: ['\\unicode{x2103}'],
+          tcperthousand: ['\\unicode{x2030}'],
+          tcmu: ['\\unicode{x3bc}'],
+          tcohm: ['\\unicode{x3a9}']
+        }
+      },
+      chtml: {
+        matchFontHeight: false,
+        displayAlign: "left",
+        displayIndent: "2em"
+      }
+    };*/
+  </script>
+  <script>
+    
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        processEscapes: true,
+        processEnvironments: true,
+      }
+    }
+  </script>
+  <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 8mm;
+      @bottom-center {
+        content: counter(page);
+      }
+      @top-center {  
+        content: "E資格の簡易メモ";  
+        font-size: 9pt;  
+      }
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+
+
+    section {
+      page-break-after: always;
+      break-after: page;
+      box-sizing: border-box;
+      width: 210mm;
+      height: 297mm;
+      padding: 8mm;
+      position: relative;
+    }
+
+    @media print {
+      .no-print {
+        display: none;
+      }
+
+      section {
+        margin: 0;
+      }
+    }
+    @media screen {
+
+      section {
+        margin: 8px auto;
+        background-color: #fff;
+        box-shadow: 0 0 8px #666;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+  <main>
+    <button class="no-print" onclick="printPage()" >Print</button>
+   
+    <section class="page">
+      <h1>微分</h1>
+      <h3>偏微分</h3>
+      <article>
+        𝑓(𝑥,𝑦)の場合：<br/>
+
+        xで偏微分の場合：$\frac{\partial f(x,y)}{\partial x}$<br/>
+        yで偏微分の場合：$\frac{\partial f(x,y)}{\partial y}$
+
+      </article>
+      <h3>連鎖律</h3>
+      <article>
+        y=f(g(x))　→ $\frac{dy}{dx}=f'(g(x))g'(x)$ <br/>  
+        <br/>  
+        u=g(x)を追加すると<br/>
+        u=g(x),y=f(u)　→　$\frac{dy}{dx}=\frac{dy}{du}\cdot\frac{du}{dx}$
+      </article>
+      <h3>ネイピア数𝒆微分</h3>
+      <article>
+        $(𝑒^𝑥)'=𝑒^𝑥$
+      </article>
+      <h3>対数微分</h3>
+      <article>
+        $(logx)'=\frac{x'}{x}=\frac{1}{x}$
+      </article>
+
+    </section>
+    <section class="page">
+      <h1>ベイズ則と尤度</h1>
+      <h3>尤度関数</h3>
+      <article>
+        <p>観測された「全部の」データのパラメータを変数として扱う数式</p>
+        <p>数式：$L(\theta) = P(x_1 \mid \theta) \times P(x_2 \mid \theta) \times \cdots \times P(x_n \mid \theta) = \prod_{i=1}^{n} P(x_i \mid \theta)$</p>
+      </article>
+      <h3>対数尤度関数</h3>
+      <article>
+          <p>$l(\theta)=logL(\theta)$</p>
+          <p>負の対数尤度関数：$NLL(\theta)=-l(\theta)=-logL(\theta)$</p>
+      </article>
+
+      <h3>ベイズ則</h3>
+      <article>
+        <p>データB(結果)が与えられたときの、そのデータ(結果)に対する原因の推定Aが正しい確率</p>
+        <p>$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$</p>
+      </article>
+      <h3>条件付き確率</h3>
+      <article>
+        <p>$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$</p>
+      </article>
+      <h3>乗法定理</h3>
+      <article>
+        <p>$P(A \cap B) = P(B) \cdot P(A \mid B)=P(A) \cdot P(B \mid A)$</p>
+      </article>
+
+      <h3>MAP推定</h3>
+      <article>
+        <p>ベイズ則に基づいて、事後確率が最大となるパラメータの推定方法</p>
+        <p>$\hat{\theta}_{\mathrm{MAP}}=argmax_{\theta}P(D|\theta) P(\theta)$</p>
+      </article>
+
+      <h3>ナイーブベイズ</h3>
+      <article>
+        <p>条件づければ、互いに独立であると仮定するベイズ則です</p>
+        <p>
+          $$
+          P(y|x_1,\cdots,x_n)=\frac{P(y)P(x_1|y)\cdots P(x_n|y)}{P(x_1,x_2,\cdots,x_n)}=\frac{P(y)\displaystyle\prod_{i=1}^nP(x_i|y)}{P(x_1,x_2,\cdots,x_n)}
+          $$  
+        </p>
+      </article>
+    </section>
+
+    <section>
+      <h3>エントロピー</h3>
+      <article>
+        <p>自己情報量：$I(x)=-logP(x)$</p>
+        <p>
+          $$
+          \begin{aligned}
+          H(x)&=\mathbb{E}_{H-P}[I(x)]=-\mathbb{E}_{H-P}[logP(x)]\\
+          &=-\displaystyle\sum_{x=1}^n P(x)logP(x)
+          \end{aligned}
+          $$  
+        </p>
+      </article>
+      <h3>条件付きエントロピー</h3>
+      <article>
+        <p>ある変数Yが与えられたときに、別の変数Xの不確実性（エントロピー）を表します</p>
+        <p>
+          $$
+          H(X \mid Y) = - \sum_{y \in \mathcal{Y}} P(y) \sum_{x \in \mathcal{X}} P(x \mid y) \log P(x \mid y)
+          $$
+        </p>
+      </article>
+      <h3>結合エントロピー</h3>
+      <article>
+        <p> 2つ以上の確率変数が同時に取る値の不確実性の総量を表します</p>
+        <p>
+          $$
+          H(X, Y) = - \sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} P(x, y) \log P(x, y)
+          $$
+        </p>
+      </article>
+      <h3>交差エントロピー</h3>
+      <article>
+        <p>ある「真の確率分布P」と「予測した確率分布Q」の間の差（不確実性）を測る指標です</p>
+        <p>
+          $$
+          H(P, Q) = - \sum_{x \in \mathcal{X}} P(x) \log Q(x)
+          $$
+        </p>
+      </article>
+      <h3>KLダイバージェンス</h3>
+      <article>
+        <p>ある分布Qと真の分布Pがどれだけ事なぅている化を示す指標です</p>
+        <p>
+          $$
+          \begin{aligned}
+          D_{\text{KL}}(P \parallel Q) &= \int P(x) \log \left( \frac{P(x)}{Q(x)} \right) dx
+          \\&=-\int P(x) \log Q(x)dx-\left(-\int P(x)\log P(x)dx\right)
+          \end{aligned}
+          $$
+        </p>
+      </article>
+      <h3>JSダイバージェンス</h3>
+      <article>
+        <p>KLダイバージェンスを対称化</p>
+        <p>
+          
+          $M(x)=\frac{1}{2}P(x)+\frac{1}{2}Q(x)の時$、<br/>
+          $$
+          D_{\text{JS}}(P \parallel Q)=\frac{1}{2}D_\text{KL}(P \parallel M)+\frac{1}{2}D_\text{KL}(Q \parallel M)
+          $$
+        </p>
+      </article>
+
+    </section>
+
+  </main>
+
+</body>
+
+<script>
+  /*window.MathJax = {
+        tex2jax: {
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      };*/
+  const printPage=()=>{
+    window.print();
+    return false;
+  }
+
+
+
+</script>
+</html>
